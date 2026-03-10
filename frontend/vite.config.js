@@ -8,7 +8,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:5001', // Your backend URL
+        target: 'https://wrap-up-starknet-2.onrender.com', // Your backend URL
         changeOrigin: true,
         secure: false,
       },
