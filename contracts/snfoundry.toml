@@ -1,0 +1,12 @@
+[sncast.devnet]
+url = "http://127.0.0.1:5050"
+accounts-file = "../starknet_accounts.json"
+account = "devnet_account_0"
+
+[sncast.sepolia]
+url = "https://api.zan.top/public/starknet-sepolia/rpc/v0_10"
+accounts-file = "../starknet_accounts.json"
+account = "my_sepolia_deployer"
+
+[sncast.default]
+account = "my_sepolia_deployer"

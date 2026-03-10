@@ -1,0 +1,208 @@
+@import "tailwindcss";
+
+@tailwind utilities;
+
+/* ========================================
+   WRAP-UP DESIGN SYSTEM
+   Professional Emerald + Black Theme
+   ======================================== */
+
+@layer base {
+  /* Root Variables */
+  :root {
+    --color-emerald: #10b981;
+    --color-emerald-dark: #059669;
+    --color-bg: #09090b; /* zinc-950 */
+    --color-surface: #0a0a0a;
+    --color-border: #27272a; /* zinc-800 */
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  html, body {
+    @apply bg-zinc-950 text-zinc-200 antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Typography Scale */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight;
+  }
+
+  /* Custom Scrollbar - Emerald Theme */
+  ::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-zinc-950;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-zinc-800 rounded-full;
+    transition: background-color 0.2s;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-emerald-500;
+  }
+
+  /* Selection - Emerald */
+  ::selection {
+    @apply bg-emerald-500/30 text-white;
+  }
+
+  /* Focus styles */
+  :focus-visible {
+    @apply outline-none ring-2 ring-emerald-500/50 ring-offset-2 ring-offset-zinc-900;
+  }
+
+  /* Smooth transitions for interactive elements */
+  button, a, input, textarea, select {
+    @apply transition-all duration-200;
+  }
+}
+
+@layer utilities {
+  /* Gradient Utilities */
+  .gradient-emerald {
+    @apply bg-gradient-to-r from-emerald-500 to-emerald-600;
+  }
+  
+  .gradient-text-emerald {
+    @apply bg-gradient-to-r from-emerald-400 to-emerald-500 bg-clip-text text-transparent;
+  }
+
+  /* Glow Effects */
+  .glow-emerald {
+    box-shadow: 0 0 40px rgba(16, 185, 129, 0.15);
+  }
+  
+  .glow-emerald-sm {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.1);
+  }
+
+  /* Glass Effect */
+  .glass {
+    @apply bg-zinc-900/40 backdrop-blur-md border border-zinc-800/80;
+  }
+
+  /* Line Clamp Utilities */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Animations */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Keyframe Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ⚡ SMOOTH TYPING ANIMATION — uses clip-path (GPU accelerated, zero layout cost)
+   Replace ALL existing .type-line / .line-1/2/3 / @keyframes blocks
+   =========================================================== */
+
+.hero-title span {
+  /* Expand the bounding box downward so 'y' and 'g' don't get clipped */
+  padding-bottom: 0.3em; 
+  /* Pull the following lines back up to keep your exact original line spacing */
+  margin-bottom: -0.25em; 
+  line-height: 1.05;
+}
+
+.type-line {
+  display: inline-block;
+  white-space: nowrap;
+  vertical-align: bottom;
+  /* Removed the redundant padding-bottom from here since the span rule above handles it */
+  clip-path: inset(0 100% 0 0);
+  will-change: clip-path;
+}
+
+.line-1 {
+  animation: typeReveal 0.7s steps(12, end) 0.2s forwards;
+}
+
+.line-2 {
+  animation: typeReveal 0.8s steps(13, end) 1.0s forwards;
+}
+
+.line-3 {
+  animation:
+    typeReveal 0.45s steps(6, end) 1.9s forwards,
+    blinkCursor 0.85s step-end infinite 1.9s;
+  border-right: 3px solid transparent;
+}
+
+@keyframes typeReveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0% 0 0); }
+}
+
+@keyframes blinkCursor {
+  0%, 100% { border-right-color: transparent; }
+  50%       { border-right-color: #10b981; }
+}
+
+/* Recharts custom styles */
+.recharts-text {
+  fill: #a1a1aa !important;
+  font-size: 11px !important;
+}
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: #27272a !important;
+}
+
+/* Custom Toast Styles */
+.toast-custom {
+  @apply bg-zinc-900 border border-zinc-800 text-white rounded-xl shadow-xl;
+}
