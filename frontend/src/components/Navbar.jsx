@@ -20,7 +20,7 @@ import {
   Menu, X, Check, Brain, FileText, Wallet, Link2, Scale, Hexagon, ChevronDown, Zap
 } from "lucide-react";
 
-const API_BASE = '/api';
+const API_BASE = 'https://wrap-up-starknet-2.onrender.com/api';
 
 export default function Navbar() {
   const { userPoints, displayName, setUserPoints, setDisplayName } = useArticleStore();
