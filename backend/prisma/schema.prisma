@@ -1,0 +1,122 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  walletAddress String   @unique
+  displayName   String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Article {
+  id              String    @id @default(auto()) @map("_id") @db.ObjectId
+  articleId       Int?
+  title           String
+  summary         String
+  detailedSummary String?
+  fullContent     String?
+  keyPoints       String[]  @default([])
+  sections        Json[]    @default([])
+  statistics      Json[]    @default([])
+  imageUrl        String?
+  articleUrl      String    @unique
+  cardJson        String?
+  ipfsHash        String?
+  curator         String?
+  curatorName     String?
+  upvotes         Int       @default(0)
+  upvotedBy       Json[]    @default([])
+  onChain         Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+  comments        Comment[]
+}
+
+model Comment {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  commentId  Int?
+  articleId  String   @db.ObjectId
+  article    Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  articleUrl String
+  content    String
+  author     String
+  authorName String?
+  ipfsHash   String?
+  upvotes    Int      @default(0)
+  upvotedBy  Json[]   @default([])
+  onChain    Boolean  @default(false)
+  parentId   String?  @db.ObjectId
+  parent     Comment? @relation("CommentReplies", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  replies    Comment[] @relation("CommentReplies")
+  createdAt  DateTime @default(now())
+}
+
+model Research {
+  id                       String            @id @default(auto()) @map("_id") @db.ObjectId
+  blockchainId             Int?
+  topic                    String
+  executiveSummary         String
+  keyInsights              String[]          @default([])
+  sources                  Json[]            @default([])
+  comparativeAnalysis      Json
+  consensusVsContradiction Json
+  visualizationData        Json
+  sourceComparisonReport   Json?             // NEW
+  metadata                 Json
+  ipfsHash                 String?
+  curator                  String?
+  curatorName              String?
+  upvotes                  Int               @default(0)
+  upvotedBy                Json[]            @default([])
+  onChain                  Boolean           @default(false)
+  createdAt                DateTime          @default(now())
+  updatedAt                DateTime          @updatedAt
+  comments                 ResearchComment[]
+}
+
+model ResearchComment {
+  id         String           @id @default(auto()) @map("_id") @db.ObjectId
+  commentId  Int?
+  researchId String           @db.ObjectId
+  research   Research         @relation(fields: [researchId], references: [id], onDelete: Cascade)
+  content    String
+  author     String
+  authorName String?
+  ipfsHash   String?
+  upvotes    Int              @default(0)
+  upvotedBy  Json[]           @default([])
+  onChain    Boolean          @default(false)
+  parentId   String?          @db.ObjectId
+  parent     ResearchComment? @relation("ResearchCommentReplies", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  replies    ResearchComment[] @relation("ResearchCommentReplies")
+  createdAt  DateTime         @default(now())
+}
+
+// ─── NEW: Article Comparator ──────────────────────────────────────────────────
+
+model Comparison {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  blockchainId    Int?
+  articleOneUrl   String
+  articleTwoUrl   String
+  articleOneTitle String
+  articleTwoTitle String
+  articleOneMeta  Json     // scraped metadata for article 1
+  articleTwoMeta  Json     // scraped metadata for article 2
+  report          Json     // full comparison report from AI
+  verdict         String   // short verdict string
+  ipfsHash        String?
+  curator         String?
+  curatorName     String?
+  upvotes         Int      @default(0)
+  upvotedBy       Json[]   @default([])
+  onChain         Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
