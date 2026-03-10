@@ -20,6 +20,7 @@ app.use(
     origin: [
       'https://wrap-up-one.vercel.app',
       'http://localhost:5173',
+      'https://wrap-up-starknet-tuq6.vercel.app/',
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     credentials: true,
