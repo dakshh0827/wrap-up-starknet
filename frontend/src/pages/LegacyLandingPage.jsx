@@ -20,7 +20,7 @@ import {
   CheckCircle, Circle, Loader
 } from "lucide-react";
 
-const API_BASE = "/api";
+const API_BASE = "https://wrap-up-starknet-2.onrender.com/api";
 
 export default function LegacyLandingPage() {
   const [url, setUrl] = useState("");
