@@ -29,7 +29,7 @@ import {
   FileText, ThumbsUp, Hexagon, Link2, Loader, Circle, ArrowLeft
 } from "lucide-react";
 
-const API_BASE = "/api";
+const API_BASE = "https://wrap-up-starknet-2.onrender.com/api";
 
 const SENTIMENT_COLORS = {
   Positive: "#10b981",
