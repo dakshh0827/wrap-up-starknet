@@ -12,7 +12,7 @@ import { Brain, Calendar, User, ThumbsUp, MessageSquare, Hexagon, TrendingUp, Ch
 // Ready for Starknet if needed for authenticated backend calls
 import { useAccount } from "@starknet-react/core";
 
-const API_BASE = '/api';
+const API_BASE = 'https://wrap-up-starknet-1.onrender.com/api';
 
 export default function AllResearchPage() {
   const [research, setResearch] = useState([]);
